@@ -1,0 +1,15 @@
+rootProject.name = 'safeword'
+include ':react-native-home-pressed'
+project(':react-native-home-pressed').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-home-pressed/android')
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+include ':react-native-randombytes'
+project(':react-native-randombytes').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-randombytes/android')
+include ':react-native-keychain'
+project(':react-native-keychain').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-keychain/android')
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
+include ':react-native-openpgpjs'
+project(':react-native-openpgpjs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-openpgpjs/android')
+
+include ':app'

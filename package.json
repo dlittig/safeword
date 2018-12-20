@@ -1,0 +1,150 @@
+{
+  "name": "safeword",
+  "version": "0.0.1",
+  "description": "Cross platform password manager with synchronization",
+  "repository": "git@git.it-sec.medien.hs-duesseldorf.de:hschmidt/littig-msc-src.git",
+  "author": "David Littig",
+  "license": "GPL-3.0-or-later",
+  "main": "index.desktop.js",
+  "src": "./",
+  "test": "./test",
+  "dist": "./dist",
+  "scripts": {
+    "start:electron": "electron-forge start",
+    "start:electron:clean": "rm -f /home/david/.safeword/config/* && electron-forge start",
+    "package:electron": "electron-forge package",
+    "make:electron": "electron-forge make",
+    "test:electron": "./node_modules/electron-mocha/bin/electron-mocha --renderer --require babel-core/register 'test/desktop/**/*.@(js|jsx)'",
+    "lint": "eslint src --color",
+    "test:native": "./node_modules/mocha/bin/mocha --renderer --require babel-core/register 'test/native/**/*.@(js|jsx)'",
+    "start:native": "node node_modules/react-native/local-cli/cli.js start",
+    "apk:native": "react-native bundle --platform android --dev false --entry-file index.native.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android/ && ./gradlew clean && ./gradlew assembleRelease",
+    "install:native": "adb install -r android/app/build/outputs/apk/release/app-release.apk",
+    "loc": "find ./src/ -name '*' | xargs wc -l"
+  },
+  "keywords": [],
+  "jest": {
+    "preset": "react-native"
+  },
+  "react-native": {
+    "os": false,
+    "electron": false,
+    "fs": false,
+    "keytar": false,
+    "crypto": false,
+    "openpgp": false,
+    "dns": false
+  },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "nsis",
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "electron-forge-maker-appimage"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn",
+        "asar": true,
+        "prune": true,
+        "ignore": [
+          ".cache",
+          "android",
+          "ios",
+          "out"
+        ]
+      },
+      "electronWinstallerConfig": {
+        "name": "safeword"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "safeword"
+      }
+    }
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.3.0",
+    "@material-ui/icons": "^3.0.0",
+    "dialog": "^0.3.1",
+    "electron-compile": "^6.4.2",
+    "electron-devtools-installer": "^2.1.0",
+    "keytar": "^4.2.1",
+    "material-ui-pickers": "^1.0.1",
+    "native-base": "^2.8.0",
+    "node-libs-react-native": "^1.0.2",
+    "openpgp": "4.1.1",
+    "pouchdb-adapter-asyncstorage": "^6.4.1",
+    "pouchdb-adapter-idb": "^6.4.1",
+    "pouchdb-adapter-leveldb": "^6.4.1",
+    "react": "16.6.0",
+    "react-dom": "16.6.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-native": "0.55.4",
+    "react-native-fs": "^2.10.14",
+    "react-native-home-pressed": "^1.1.3",
+    "react-native-js-stepper": "^0.2.1",
+    "react-native-keychain": "^3.0.0",
+    "react-native-openpgpjs": "git+https://git@github.com/dlittig/react-native-openpgpjs.git#0.1.2",
+    "react-native-randombytes": "^3.5.1",
+    "react-native-scripts": "1.13.1",
+    "react-native-simple-dialogs": "^0.4.1",
+    "react-native-vector-icons": "4.6.0",
+    "react-navigation": "^2.13.0",
+    "react-navigation-backhandler": "^1.1.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "readable-stream": "^3.0.0",
+    "redux": "^3.0.0",
+    "redux-auth-wrapper": "^2.0.2",
+    "redux-thunk": "^2.2.0",
+    "rxdb": "^7.7.1",
+    "vm": "^0.1.0",
+    "webdav": "^1.6.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-remove-strict-mode": "^0.0.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "4.0.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-enzyme": "^1.0.0-beta.1",
+    "electron-forge": "^5.2.0",
+    "electron-forge-maker-appimage": "^20.8.0",
+    "electron-forge-maker-nsis": "^20.8.0",
+    "electron-mocha": "^6.0.4",
+    "electron-prebuilt-compile": "3.0.5",
+    "enzyme": "^3.7.0",
+    "eslint": "^5",
+    "eslint-config-airbnb": "^15",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jsx-a11y": "^5",
+    "eslint-plugin-react": "^7",
+    "mocha": "^5.2.0",
+    "pouchdb-adapter-memory": "^7.0.0",
+    "react-native-mock": "^0.3.1",
+    "react-test-renderer": "16.3.1",
+    "redux-persist": "^5.9.1",
+    "spectron": "^3.8.0"
+  }
+}

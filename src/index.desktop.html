@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  <body style="overflow: hidden; background-color: rgba(0,0,0,0); margin: 0" >
+    <style>
+      @font-face {
+        font-family: "Roboto";
+        src: url("../fonts/Roboto-Regular.ttf");
+      }
+
+      body, * {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      }
+    </style>
+    <div id="App"></div>
+  </body>
+
+  <script>
+    import React from 'react'
+    import ReactDOM from 'react-dom'
+    import { AppContainer } from 'react-hot-loader'
+    import { Provider } from 'react-redux'
+    import { HashRouter as Router } from 'react-router-dom'
+
+    import { store, persistor } from './store/store.desktop'
+
+    const render = () => {
+      const App = require('./app.desktop').default;
+      ReactDOM.render(
+        <AppContainer>
+          <Provider store={store}>
+            <Router basename="/">
+              <App />
+            </Router>
+          </Provider>
+        </AppContainer>, document.getElementById('App'));
+    }
+
+    render();
+    if (module.hot) {
+      module.hot.accept(render);
+    }
+  </script>
+</html>
